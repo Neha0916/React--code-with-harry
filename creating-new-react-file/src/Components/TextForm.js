@@ -18,7 +18,8 @@ export default function TextForm(props) {
         setText(event.target.value);
     }
     const displayTrimClick=()=>{
-        const newText=text.trim();
+        let newText=text.split(/[ ]+/);
+        newText=newText.join(" ");
         setText(newText);
     }
     const displayClearClick=()=>{
