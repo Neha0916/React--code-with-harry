@@ -17,6 +17,14 @@ export default function TextForm(props) {
         
         setText(event.target.value);
     }
+    const displayTrimClick=()=>{
+        const newText=text.trim();
+        setText(newText);
+    }
+    const displayClearClick=()=>{
+        const newText='';
+        setText(newText);
+    }
     const[text, setText] =useState('Enter text here')
   return (
     <>
@@ -25,8 +33,11 @@ export default function TextForm(props) {
 <h1 >{props.heading}</h1>
     <textarea className="form-control" id="myBox" value={text} onChange={handleOnChange} rows="8" ></textarea>
 </div>
-<button className="btn btn-success" onClick={handleUpClick}>Convert to Uppercase</button>
-<button className="btn btn-success mx-3" onClick={handleDownClick}>Convert to Lowercase</button>
+<button className="btn btn-success mx-3 my-3" onClick={handleUpClick}>Convert to Uppercase</button>
+<button className="btn btn-success mx-3 my-3" onClick={handleDownClick}>Convert to Lowercase</button>
+<button className="btn btn-success mx-3 my-3" onClick={displayTrimClick}>Trim</button>
+<button className="btn btn-success mx-3 my-3" onClick={displayClearClick}>Clear Text</button>
+ 
     </div>
     <div className="container">
 <h1 className='my-3'>Your text summary</h1>
