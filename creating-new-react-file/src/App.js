@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import About from './Components/About';
+// import About from './Components/About';
 import Navbar from './Components/Navbar';
 import TextForm from './Components/TextForm';
 import React,{useState} from 'react'
@@ -16,7 +16,7 @@ function App() {
     }
     else{
       setMode('dark');
-      document.body.style.backgroundColor='grey';
+      document.body.style.backgroundColor='#042743';
     }
   }
 
@@ -27,9 +27,9 @@ function App() {
 <div className="container my-3">
 <TextForm heading="Enter the content to analyze below" mode={mode} />
 </div>
-<div className="container">
+{/* <div className="container">
   <About/>
-</div>
+</div> */}
     </>
   );
 }
