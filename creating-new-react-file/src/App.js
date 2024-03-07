@@ -9,7 +9,7 @@ import React,{useState} from 'react'
 function App() {
   const [mode,setMode]=useState('light');
   const [alert,setAlert]=useState(null);
-
+  let color;
   const showAlert=(message,type)=>{
     setAlert({
       msg: message,
@@ -20,17 +20,21 @@ function App() {
     },2000)
   }
 
+  const colorChange=(event)=>{
+    color=event.target.value;
+    // console.log(color);
+  }
+
   const toggleMode=()=>{
-    console.log(mode);
-    if(mode==='dark'){
+    if(mode==='light'){
+      setMode(color);
+      document.body.style.backgroundColor=color;
+      showAlert("Dark mode has been enabled","success");
+    }
+    else{
       setMode('light');
       document.body.style.backgroundColor='white';
       showAlert("Light mode has been enabled","success");
-    }
-    else{
-      setMode('dark');
-      document.body.style.backgroundColor='#042743';
-      showAlert("Dark mode has been enabled","success");
     }
   }
 
@@ -38,7 +42,7 @@ function App() {
     <>
     {/* console.log({mode}); */}
     <Alert alert={alert}/>
-<Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
+<Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} onColorChange={colorChange}/>
 <div className="container my-3">
 <TextForm heading="Enter the content to analyze below" mode={mode} showAlert={showAlert} />
 

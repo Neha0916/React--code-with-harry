@@ -16,7 +16,7 @@ export default function TextForm(props) {
         props.showAlert("Convertd to LowerCase","success");
     }
     const handleOnChange=(event)=>{
-        
+        console.log(props.color+" "+props.mode);
         setText(event.target.value);
 
     }
@@ -37,7 +37,7 @@ export default function TextForm(props) {
     <div className="container" style={{color: props.mode==='light'?'black':'white'}}>
 <div className="mb-3" style={{color: props.mode==='light'?'black':'white'}}>
 <h1 >{props.heading}</h1>
-    <textarea className="form-control" style={{backgroundColor:props.mode==='dark'?'#042743':'white',color: props.mode==='light'?'black':'white'}} id="myBox"  value={text} onChange={handleOnChange} rows="8" ></textarea>
+    <textarea className="form-control" style={{backgroundColor:props.mode==='light'?'white':props.mode,color: props.mode==='light'?'black':'white'}} id="myBox"  value={text} onChange={handleOnChange} rows="8" ></textarea>
 </div>
 <button className="btn btn-success mx-3 my-3" onClick={handleUpClick}>Convert to Uppercase</button>
 <button className="btn btn-success mx-3 my-3" onClick={handleDownClick}>Convert to Lowercase</button>
@@ -47,7 +47,7 @@ export default function TextForm(props) {
     </div>
     <div className="container" style={{color: props.mode==='light'?'black':'white'}}>
 <h1 className='my-3'>Your text summary</h1>
-<p>{text.split(" ").length} words and {text.length}characters</p>
+<p>{text.split(" ").length-1} words and {text.length}characters</p>
 <p>{0.008*text.split(" ").length}</p>
 <h2>Preview</h2>
 <p>{text.length>0?text:"Enter some text in the textarea to see the preview"}</p>
