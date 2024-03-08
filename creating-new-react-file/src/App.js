@@ -29,11 +29,13 @@ function App() {
     if(mode==='light'){
       setMode(color);
       document.body.style.backgroundColor=color;
+      document.title='TextUtils- Dark Mode';
       showAlert("Dark mode has been enabled","success");
     }
     else{
       setMode('light');
       document.body.style.backgroundColor='white';
+      document.title='TextUtils- Light Mode';
       showAlert("Light mode has been enabled","success");
     }
   }
