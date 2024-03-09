@@ -6,11 +6,11 @@ import Alert from './Components/Alert';
 import TextForm from './Components/TextForm';
 import React,{useState} from 'react';
 // import switch from "react-dom/client";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route
+// } from "react-router-dom";
 
 function App() {
   const [mode,setMode]=useState('light');
@@ -47,25 +47,25 @@ function App() {
   }
 
   return (
-    <Router>
-      <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} onColorChange={colorChange} />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/" element={<TextForm heading="Enter the content to analyze below" mode={mode} showAlert={showAlert} />} />
-        </Routes>
-      </div>
-    </Router>
+    // <Router>
+    //   <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} onColorChange={colorChange} />
+    //   <Alert alert={alert} />
+    //   <div className="container my-3">
+    //     <Routes>
+    //       <Route path="/about" element={<About />} />
+    //       <Route path="/" element={<TextForm heading="Enter the content to analyze below" mode={mode} showAlert={showAlert} />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
     
-//     <>
-//     <Alert alert={alert}/>
-// <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} onColorChange={colorChange}/>
-// <div className="container my-3">
-//     <About />
-//     <TextForm heading="Enter the content to analyze below" mode={mode} showAlert={showAlert} />
-// </div>
-// </>
+    <>
+    <Alert alert={alert}/>
+<Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} onColorChange={colorChange}/>
+<div className="container my-3">
+    <About />
+    <TextForm heading="Enter the content to analyze below" mode={mode} showAlert={showAlert} />
+</div>
+</>
   );
 }
 
