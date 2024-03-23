@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Spin from './Spin';
+import PropTypes from 'prop-types'
 
 export default class News extends Component {
  
+  static defaultProps = {
+    country:'in',
+    pageSize:8,
+    category:'science',
+
+  }
+  static propTypes={
+    country: PropTypes.string,
+    pageSize:PropTypes.number,
+    category:PropTypes.string,
+  }
+
   constructor(){
     super();
     // console.log("Hello I am a constructor");
@@ -15,7 +28,7 @@ export default class News extends Component {
   }
 
 async componentDidMount(){
-    let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=1&pageSize=${this.props.pageSize}`;
+    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=1&pageSize=${this.props.pageSize}`;
     this.setState({loading:true});
     let data=await fetch(url);
     let parseData=await data.json();
@@ -27,7 +40,7 @@ async componentDidMount(){
 
 handlePrevClick=async()=>{
   
-  let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
+  let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
   this.setState({loading:true});
     let data=await fetch(url);
     let parseData=await data.json();
@@ -43,7 +56,7 @@ handleNextClick = async()=>{
   if(!(this.state.page+1>Math.ceil(this.state.totalResults/this.props.pageSize))){
   // }
   // else{
-  let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+  let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
   this.setState({loading:true});
     let data=await fetch(url);
     let parseData=await data.json()
@@ -63,14 +76,15 @@ handleNextClick = async()=>{
     return (
       <>
         <div className='container my-3'>
-        <h1 className='text-center'>NewsMonkey - Top Headlines</h1>
+        <h1 className='text-center' style={{margin:'20px'}}>NewsMonkey - Top Headlines</h1>
         {/* <div className="my-3"></div> */}
         {this.state.loading && <Spin/>}
 
         <div className="row ">
         {!this.state.loading &&this.state.articles.map((element)=>{
-          return <div className="col-lg-4 col-md-6 d-flex justify-content-center" key={element.url}>
-            <NewsItem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,60):""} imgUrl={element.urlToImage} newsUrl={element.url}/>
+          return <div className="col-md-4" key={element.url}>
+            <NewsItem  title={element.title?element.title.slice(0,45):""} description={element.description?element.description.slice(0,60):""} imgUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt}/>
+            {/* console.log({element.publishedAt}) */}
             </div>
         })}   
         </div>
