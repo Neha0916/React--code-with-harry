@@ -27,47 +27,28 @@ export default class News extends Component {
     }
   }
 
+async updateNews(){
+  const url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+  this.setState({loading:true});
+  let data=await fetch(url);
+  let parseData=await data.json();
+  console.log(parseData);
+  this.setState({articles:parseData.articles,totalResults:parseData.totalResults,
+    loading:false
+  })
+}
+
 async componentDidMount(){
-    let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=1&pageSize=${this.props.pageSize}`;
-    this.setState({loading:true});
-    let data=await fetch(url);
-    let parseData=await data.json();
-    console.log(parseData);
-    this.setState({articles:parseData.articles,totalResults:parseData.totalResults,
-      loading:false
-    })
+    this.updateNews();
 }
 
 handlePrevClick=async()=>{
-  
-  let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
-  this.setState({loading:true});
-    let data=await fetch(url);
-    let parseData=await data.json();
-    console.log(parseData);
-  this.setState({
-    articles:parseData.articles,
-    page:this.state.page-1,
-    loading:false
-  })
-  // console.log(url)
+  this.setState({page:this.state.page-1});
+  this.updateNews();
 }
 handleNextClick = async()=>{
-  if(!(this.state.page+1>Math.ceil(this.state.totalResults/this.props.pageSize))){
-  // }
-  // else{
-  let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
-  this.setState({loading:true});
-    let data=await fetch(url);
-    let parseData=await data.json()
-    console.log(parseData);
-    this.setState({
-      articles:parseData.articles,
-    page:this.state.page+1,
-    loading:false
-  })
-  // console.log(url)
-}
+  this.setState({page:this.state.page+1});
+  this.updateNews();
 }
 
 
