@@ -17,7 +17,7 @@ export default class News extends Component {
     category:PropTypes.string,
   }
 
-  constructor(){
+  constructor(props){
     super();
     // console.log("Hello I am a constructor");
     this.state={
@@ -25,6 +25,7 @@ export default class News extends Component {
       loading:true,
       page:1
     }
+    document.title='NewsMonkey - '+props.category.charAt(0).toUpperCase()+props.category.slice(1);
   }
 
 async updateNews(){
@@ -57,7 +58,7 @@ handleNextClick = async()=>{
     return (
       <>
         <div className='container my-3'>
-        <h1 className='text-center' style={{margin:'20px'}}>NewsMonkey - Top Headlines</h1>
+        <h1 className='text-center' style={{margin:'20px'}}>NewsMonkey - {this.props.category.charAt(0).toUpperCase()}{this.props.category.slice(1)}</h1>
         {/* <div className="my-3"></div> */}
         {this.state.loading && <Spin/>}
 
