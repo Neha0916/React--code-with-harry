@@ -1,4 +1,5 @@
 import './App.css';
+import LoadingBar from 'react-top-loading-bar'
 
 import React, { Component } from 'react'
 import NavBar from './components/NavBar';
@@ -14,6 +15,10 @@ export default class App extends Component {
     return (
       <Router> {/* Use Router instead of Router */}
       <NavBar />
+      <LoadingBar
+        color='#f11946'
+        progress={10}
+      />
       <Routes> {/* Use Routes instead of Routes */}
         <Route exact path="/" element={<News key="general" pageSize={5} country="in" category="general" />} />
         <Route exact path="/general" element={<News key="general" pageSize={5} country="in" category="general" />} />
