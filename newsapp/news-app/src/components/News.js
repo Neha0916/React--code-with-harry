@@ -34,7 +34,8 @@ export default class News extends Component {
     // a fake async api call like which sends
     // 20 more records in 1.5 secs
     this.setState({page:this.state.page+1})
-    const url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+    const url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+    console.log(url)
   this.setState({loading:true});
   let data=await fetch(url);
   let parseData=await data.json();
@@ -48,14 +49,19 @@ export default class News extends Component {
 
 
 async updateNews(){
-  const url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&&apiKey=067b6b09407344599f58f8a0d85fd9a3&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+  this.props.setProgress(10);
+  const url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
   this.setState({loading:true});
+  this.props.setProgress(30);
   let data=await fetch(url);
+  
   let parseData=await data.json();
   console.log(parseData);
+  this.props.setProgress(70);
   this.setState({articles:parseData.articles,totalResults:parseData.totalResults,
     loading:false
   })
+  this.props.setProgress(100);
 }
 
 async componentDidMount(){
